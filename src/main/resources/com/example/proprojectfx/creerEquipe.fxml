@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<AnchorPane prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #f5f5f5;"
+            xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.proprojectfx.controller.CreerEquipeController">
+
+    <children>
+        <!--l'entete -->
+        <AnchorPane prefHeight="70.0" prefWidth="1000.0" style="-fx-background-color: #2778e4;">
+            <children>
+                <Text fill="WHITE" layoutX="30.0" layoutY="45.0" text="Gestion des Équipes">
+                    <font><Font name="System Bold" size="22.0" /></font>
+                </Text>
+            </children>
+        </AnchorPane>
+
+        <!--contenu principal-->
+        <HBox layoutY="80.0" prefHeight="620.0" prefWidth="1000.0" spacing="30.0">
+            <children>
+
+                <!-- ajoute equipe -->
+                <VBox prefWidth="400.0" spacing="20.0">
+                    <padding><Insets left="40.0" top="20.0"/></padding>
+                    <children>
+                        <VBox spacing="5.0">
+                            <children>
+                                <Label text="Nom de l'Équipe :" style="-fx-font-weight: bold;" />
+                                <TextField fx:id="nomEquipeField" prefHeight="35.0" />
+                            </children>
+                        </VBox>
+                        <VBox spacing="5.0">
+                            <children>
+                                <Label text="Département / Spécialité :" style="-fx-font-weight: bold;" />
+                                <TextField fx:id="departementField" prefHeight="35.0" />
+                            </children>
+                        </VBox>
+                        <VBox spacing="5.0">
+                            <children>
+                                <Label text="Projet associé :" style="-fx-font-weight: bold;" />
+                                <ComboBox fx:id="projetCombo" prefWidth="300.0" promptText="Choisir un projet" />
+                            </children>
+                        </VBox>
+
+                        <VBox spacing="10.0">
+                            <children>
+                                <Label text="Ajouter des membres :" style="-fx-font-weight: bold;" />
+                                <HBox spacing="10.0">
+                                    <children>
+                                        <ComboBox fx:id="membreCombo" prefWidth="300.0" promptText="Sélectionnez un membre" />
+                                        <Button text="Ajouter" onAction="#ajouterMembre"
+                                                style="-fx-background-color: #4caf50; -fx-text-fill: white;" />
+                                        <Button text="Retirer" onAction="#retirerMembre"
+                                                style="-fx-background-color: #dc3545; -fx-text-fill: white;" />
+                                    </children>
+                                </HBox>
+                                <ListView fx:id="membresList" prefHeight="120.0" />
+                            </children>
+                        </VBox>
+
+                        <HBox alignment="CENTER" spacing="20.0">
+                            <children>
+                                <Button fx:id="createButton" onAction="#handleCreate" prefHeight="40.0" prefWidth="150.0"
+                                        style="-fx-background-color: #2778e4; -fx-text-fill: white; -fx-font-weight: bold;"
+                                        text="Créer Équipe" />
+                                <Button fx:id="backButton" onAction="#handleBack" prefHeight="40.0" prefWidth="150.0"
+                                        style="-fx-background-color: #dc3545; -fx-text-fill: white; -fx-font-weight: bold;"
+                                        text="Retour" />
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+
+                <!--tableau des equipes existant -->
+                <VBox prefWidth="550.0">
+                    <padding><Insets right="40.0" top="20.0"/></padding>
+                    <children>
+                        <Label text="Liste des Équipes" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+                        <TableView fx:id="equipesTable" prefHeight="480.0" prefWidth="550.0">
+                            <columns>
+                                <TableColumn fx:id="nomColumn" text="Nom" prefWidth="150.0">
+                                    <cellValueFactory><PropertyValueFactory property="nom" /></cellValueFactory>
+                                </TableColumn>
+
+                                <TableColumn fx:id="departementColumn" text="Département" prefWidth="150.0">
+                                    <cellValueFactory><PropertyValueFactory property="departement" /></cellValueFactory>
+                                </TableColumn>
+
+                                <TableColumn fx:id="projetColumn" text="Projet" prefWidth="120.0">
+                                    <cellValueFactory><PropertyValueFactory property="projet" /></cellValueFactory>
+                                </TableColumn>
+
+                                <TableColumn fx:id="membresCountColumn" text="Membres" prefWidth="130.0">
+                                    <cellValueFactory><PropertyValueFactory property="membresCount" /></cellValueFactory>
+                                </TableColumn>
+                            </columns>
+                        </TableView>
+
+                        <!--bouttons -->
+                        <HBox spacing="10.0">
+                            <padding><Insets top="10.0"/></padding>
+                            <children>
+                                <Button fx:id="viewButton" onAction="#handleViewEquipe" prefHeight="35.0" prefWidth="170.0"
+                                        style="-fx-background-color: #2778e4; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;"
+                                        text="👁 Voir Détails" />
+                                <Button fx:id="editButton" onAction="#handleEditEquipe" prefHeight="35.0" prefWidth="170.0"
+                                        style="-fx-background-color: #ff9800; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;"
+                                        text="✏ Modifier" />
+                                <Button fx:id="deleteButton" onAction="#handleDeleteEquipe" prefHeight="35.0" prefWidth="170.0"
+                                        style="-fx-background-color: #dc3545; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;"
+                                        text="🗑 Supprimer" />
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+
+            </children>
+        </HBox>
+    </children>
+</AnchorPane>

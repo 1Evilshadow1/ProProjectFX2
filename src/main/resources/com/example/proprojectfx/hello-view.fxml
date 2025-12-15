@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<?import java.lang.String?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="480.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.proprojectfx.controller.LoginController">
+    <children>
+        <!-- Panneau lateral bleu -->
+        <Pane prefHeight="480.0" prefWidth="187.0" style="-fx-background-color: #2778e4;">
+            <children>
+                <Text layoutX="23.0" layoutY="240.0" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0"
+                      text="ProProject" textAlignment="LEFT" wrappingWidth="141.0">
+                    <font>
+                        <Font name="System Bold" size="24.0" />
+                    </font>
+                </Text>
+            </children>
+        </Pane>
+
+        <!-- Formulaire de connexion -->
+        <VBox layoutX="220.0" layoutY="80.0" prefWidth="350.0" spacing="20.0">
+            <children>
+                <!-- Titre -->
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Connexion">
+                    <font>
+                        <Font name="System Bold" size="28.0" />
+                    </font>
+                </Text>
+
+                <!-- Champ Email -->
+                <VBox spacing="8.0">
+                    <children>
+                        <Label text="Email:" style="-fx-font-size: 14px; -fx-font-weight: bold;" />
+                        <TextField fx:id="emailField" promptText="Entrez votre email"
+                                   style="-fx-pref-height: 35px; -fx-font-size: 13px;" />
+                    </children>
+                </VBox>
+
+                <!-- Champ Mot de passe -->
+                <VBox spacing="8.0">
+                    <children>
+                        <Label text="Mot de passe:" style="-fx-font-size: 14px; -fx-font-weight: bold;" />
+                        <PasswordField fx:id="passwordField" promptText="Entrez votre mot de passe"
+                                       style="-fx-pref-height: 35px; -fx-font-size: 13px;" />
+                    </children>
+                </VBox>
+
+                <!-- Champ ComboBox -->
+                <VBox spacing="8.0">
+                    <children>
+                        <Label text="Type:" style="-fx-font-size: 14px; -fx-font-weight: bold;" />
+                        <ComboBox fx:id="typeComboBox" prefHeight="35.0" prefWidth="350.0"
+                                  promptText="Sélectionnez votre type de compte"
+                                  style="-fx-font-size: 13px;">
+                            <items>
+                                <javafx.collections.FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="Administrateur" />
+                                    <String fx:value="Chef de projet" />
+                                    <String fx:value="Développeur" />
+                                    <String fx:value="Client" />
+                                </javafx.collections.FXCollections>
+                            </items>
+                        </ComboBox>
+                    </children>
+                </VBox>
+
+                <!-- Bouton de connexion -->
+                <Button fx:id="loginButton"  prefHeight="40.0" prefWidth="350.0"
+                        text="Se connecter"
+                        style="-fx-background-color: #2778e4; -fx-text-fill: white; -fx-font-size: 15px; -fx-font-weight: bold; -fx-cursor: hand;"
+                        onAction="#LoginHandle">
+                    <VBox.margin>
+                        <Insets top="10.0" />
+                    </VBox.margin>
+                </Button>
+
+                <!-- Lien mot de passe oublie -->
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Mot de passe oublié?"
+                      style="-fx-fill: #2778e4; -fx-cursor: hand; -fx-font-size: 12px;"
+                      textAlignment="CENTER" wrappingWidth="350.0" />
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

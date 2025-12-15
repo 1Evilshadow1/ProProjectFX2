@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #f5f5f5;"
+            xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.proprojectfx.controller.DashController">
+
+
+    <children>
+        <!-- En-tete -->
+        <AnchorPane prefHeight="150.0" prefWidth="1000.0" style="-fx-background-color: linear-gradient(to right, #2778e4, #1a5bb8);">
+            <children>
+                <VBox layoutX="150.0" layoutY="80.0" spacing="5.0">
+                    <children>
+                        <Text fx:id="fullNameText" fill="WHITE" text="Aziz Benothmen">
+                            <font><Font name="System Bold" size="24.0" /></font>
+                        </Text>
+                        <Text fx:id="roleText" fill="#e0e0e0" text="Chef de Projet">
+                            <font><Font size="14.0" /></font>
+                        </Text>
+                    </children>
+                </VBox>
+                <Text fill="WHITE" layoutX="350.0" layoutY="45.0" text="Dashboard Chef de Projet">
+                    <font><Font name="System Bold" size="22.0" /></font>
+                </Text>
+
+                <Button fx:id="logoutButton" layoutX="850.0" layoutY="35.0" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: white; -fx-text-fill: #2778e4; -fx-font-weight: bold; -fx-cursor: hand;" text="Déconnexion" onAction="#handleLogout" />
+
+
+            </children>
+        </AnchorPane>
+
+        <!-- Actions Rapides -->
+        <VBox layoutX="50.0" layoutY="180.0" spacing="40.0">
+            <children>
+                <Text text="Actions Rapides" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+
+                <HBox spacing="30.0">
+                    <children>
+
+
+                        <!-- Premiere ligne de boutons -->
+                        <HBox spacing="25.0">
+                            <children>
+                                <!-- Bouton Creer un Projet -->
+                                <VBox fx:id="createProjectBox" alignment="CENTER" onMouseClicked="#handleCreateProject" spacing="12.0"
+                                      style="-fx-background-color: linear-gradient(to bottom, #2778e4, #1a5bb8); -fx-background-radius: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 15, 0, 0, 4); -fx-cursor: hand;"
+                                      HBox.hgrow="ALWAYS" prefWidth="210.0" prefHeight="170.0" >
+                                    <padding>
+                                        <Insets bottom="25.0" left="20.0" right="20.0" top="25.0" />
+                                    </padding>
+                                    <children>
+                                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="📁"
+                                              textAlignment="CENTER">
+                                            <font>
+                                                <Font size="50.0" />
+                                            </font>
+                                        </Text>
+                                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Créer un Projet"
+                                              textAlignment="CENTER">
+                                            <font>
+                                                <Font name="System Bold" size="18.0" />
+                                            </font>
+                                        </Text>
+                                        <Text fill="#e0e0e0" strokeType="OUTSIDE" strokeWidth="0.0"
+                                              text="Nouveau projet" textAlignment="CENTER">
+                                            <font>
+                                                <Font size="13.0" />
+                                            </font>
+                                        </Text>
+                                    </children>
+                                </VBox>
+
+                                <!-- Bouton Creer un Sprint -->
+                                <VBox fx:id="createSprintBox" alignment="CENTER"  spacing="12.0" onMouseClicked="#openCreerSprint"
+                                      style="-fx-background-color: linear-gradient(to bottom, #28a745, #1e7e34); -fx-background-radius: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 15, 0, 0, 4); -fx-cursor: hand;"
+                                      HBox.hgrow="ALWAYS" prefWidth="210.0" prefHeight="180.0" >
+                                    <padding>
+                                        <Insets bottom="25.0" left="20.0" right="20.0" top="25.0" />
+                                    </padding>
+                                    <children>
+                                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="⚡"
+                                              textAlignment="CENTER">
+                                            <font>
+                                                <Font size="50.0" />
+                                            </font>
+                                        </Text>
+                                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Créer un Sprint"
+                                              textAlignment="CENTER">
+                                            <font>
+                                                <Font name="System Bold" size="18.0" />
+                                            </font>
+                                        </Text>
+                                        <Text fill="#e0e0e0" strokeType="OUTSIDE" strokeWidth="0.0"
+                                              text="Planifier un sprint" textAlignment="CENTER">
+                                            <font>
+                                                <Font size="13.0" />
+                                            </font>
+                                        </Text>
+                                    </children>
+                                </VBox>
+
+                                <!-- Bouton Creer une Tâche -->
+                                <VBox fx:id="createTaskBox" alignment="CENTER" onMouseClicked="#handleCreateTask" spacing="12.0"
+                                      style="-fx-background-color: linear-gradient(to bottom, #ff9800, #e68900); -fx-background-radius: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 15, 0, 0, 4); -fx-cursor: hand;"
+                                      HBox.hgrow="ALWAYS" prefWidth="210.0" prefHeight="180.0">
+                                    <padding>
+                                        <Insets bottom="25.0" left="20.0" right="20.0" top="25.0" />
+                                    </padding>
+                                    <children>
+                                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="✓"
+                                              textAlignment="CENTER">
+                                            <font>
+                                                <Font name="System Bold" size="50.0" />
+                                            </font>
+                                        </Text>
+                                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Créer une Tâche"
+                                              textAlignment="CENTER">
+                                            <font>
+                                                <Font name="System Bold" size="18.0" />
+                                            </font>
+                                        </Text>
+                                        <Text fill="#e0e0e0" strokeType="OUTSIDE" strokeWidth="0.0"
+                                              text="Ajouter une tâche" textAlignment="CENTER">
+                                            <font>
+                                                <Font size="13.0" />
+                                            </font>
+                                        </Text>
+                                    </children>
+                                </VBox>
+
+                                <!-- Bouton Creer une Equipe -->
+                                <VBox fx:id="createTeamBox" alignment="CENTER"  spacing="12.0"
+                                      style="-fx-background-color: linear-gradient(to bottom, #9c27b0, #7b1fa2); -fx-background-radius: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 15, 0, 0, 4); -fx-cursor: hand;"
+                                      HBox.hgrow="ALWAYS" prefWidth="210.0" prefHeight="180.0" onMouseClicked="#openCreerEquipe">
+                                    <padding>
+                                        <Insets bottom="25.0" left="20.0" right="20.0" top="25.0" />
+                                    </padding>
+                                    <children>
+                                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="👥"
+                                              textAlignment="CENTER">
+                                            <font>
+                                                <Font size="50.0" />
+                                            </font>
+                                        </Text>
+                                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Créer une Équipe"
+                                              textAlignment="CENTER">
+                                            <font>
+                                                <Font name="System Bold" size="18.0" />
+                                            </font>
+                                        </Text>
+                                        <Text fill="#e0e0e0" strokeType="OUTSIDE" strokeWidth="0.0"
+                                              text="Constituer une équipe" textAlignment="CENTER">
+                                            <font>
+                                                <Font size="13.0" />
+                                            </font>
+                                        </Text>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </HBox>
+
+
+
+
+
+
+                    </children>
+                </HBox>
+
+                <!-- Vue d ensemble -->
+
+                <Text text="Vue d'ensemble" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+                <HBox spacing="30.0">
+                    <children>
+                        <VBox style="-fx-background-color: white; -fx-background-radius: 15;" prefWidth="200.0" prefHeight="120.0">
+                            <padding><Insets top="20.0" bottom="20.0" left="20.0" right="20.0" /></padding>
+                            <children>
+                                <Text fx:id="activeProjectsText" text="0" fill="#2778e4">
+                                    <font><Font name="System Bold" size="36.0"/></font>
+                                </Text>
+                                <Text text="Projets Actifs" fill="#666"/>
+                            </children>
+                        </VBox>
+                        <VBox style="-fx-background-color: white; -fx-background-radius: 15;" prefWidth="200.0" prefHeight="120.0">
+                            <padding><Insets top="20.0" bottom="20.0" left="20.0" right="20.0" /></padding>
+                            <children>
+                                <Text fx:id="activeSprintsText" text="0" fill="#4caf50">
+                                    <font><Font name="System Bold" size="36.0"/></font>
+                                </Text>
+                                <Text text="Sprints en Cours" fill="#666"/>
+                            </children>
+                        </VBox>
+                        <VBox style="-fx-background-color: white; -fx-background-radius: 15;" prefWidth="200.0" prefHeight="120.0">
+                            <padding><Insets top="20.0" bottom="20.0" left="20.0" right="20.0" /></padding>
+                            <children>
+                                <Text fx:id="pendingTasksText" text="0" fill="#ff9800">
+                                    <font><Font name="System Bold" size="36.0"/></font>
+                                </Text>
+                                <Text text="Tâches en Attente" fill="#666"/>
+                            </children>
+                        </VBox>
+                        <VBox style="-fx-background-color: white; -fx-background-radius: 15;" prefWidth="200.0" prefHeight="120.0">
+                            <padding><Insets top="20.0" bottom="20.0" left="20.0" right="20.0" /></padding>
+                            <children>
+                                <Text fx:id="teamMembersText" text="0" fill="#9c27b0">
+                                    <font><Font name="System Bold" size="36.0"/></font>
+                                </Text>
+                                <Text text="Membres d'Équipe" fill="#666"/>
+                            </children>
+                        </VBox>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>
