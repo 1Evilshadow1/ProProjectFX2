@@ -29,8 +29,6 @@ public class DashBoardAdminController {
 
     private Administrateur currentAdmin;
 
-    // ======================== CLASSE POUR AFFICHER LES UTILISATEURS ========================
-
     public static class UserDisplay {
         private String id;
         private String nom;
@@ -48,7 +46,6 @@ public class DashBoardAdminController {
             this.role = role;
         }
 
-        // Getters
         public String getId() { return id; }
         public String getNom() { return nom; }
         public String getPrenom() { return prenom; }
@@ -127,7 +124,7 @@ public class DashBoardAdminController {
         }
 
         try {
-            // Récupérer les détails complets de l'utilisateur
+            //recuperation des details ds comptes
             String query = "SELECT u.* FROM user_tab u WHERE u.id = ?";
 
             PreparedStatement pstmt = conn.prepareStatement(query);
@@ -146,9 +143,9 @@ public class DashBoardAdminController {
                 details.append(" Type : ").append(rs.getString("type")).append("\n");
                 details.append(" Rôle : ").append(rs.getString("role") != null ? rs.getString("role") : "N/A").append("\n\n");
 
-                // Informations supplémentaires selon le type
+                //information supp selon le role
                 if ("MEMBRE".equals(rs.getString("type"))) {
-                    // Récupérer la disponibilité et les projets
+                    //recuperer la disponibilité
                     String memberQuery = "SELECT mi.dispo, " +
                             "(SELECT COUNT(*) FROM membre_project_tab WHERE membre_id = ?) as nb_projets, " +
                             "(SELECT COUNT(*) FROM tache_tab WHERE membre_assigne_id = ?) as nb_taches " +
@@ -165,14 +162,14 @@ public class DashBoardAdminController {
                         details.append(" Nombre de tâches : ").append(memberRs.getInt("nb_taches")).append("\n");
                     }
                 } else if ("CHEF_PROJET".equals(rs.getString("type"))) {
-                    // Récupérer le nombre de projets gérés
+                    //nbr projets gérer
                     String chefQuery = "SELECT COUNT(*) as nb_projets FROM project_tab WHERE chef_projet_id = ?";
                     PreparedStatement chefStmt = conn.prepareStatement(chefQuery);
                     chefStmt.setString(1, selected.getId());
                     ResultSet chefRs = chefStmt.executeQuery();
 
                     if (chefRs.next()) {
-                        details.append("📁 Projets gérés : ").append(chefRs.getInt("nb_projets")).append("\n");
+                        details.append(" Projets gérés : ").append(chefRs.getInt("nb_projets")).append("\n");
                     }
                 }
 
@@ -207,7 +204,7 @@ public class DashBoardAdminController {
             return;
         }
 
-        // Vérifier qu'on ne supprime pas l'admin actuel
+        //vérifier qu'on ne supprime pas l'admin actuel
         if (selected.getId().equals(currentAdmin.getId())) {
             showAlert(Alert.AlertType.ERROR, "Action interdite",
                     "Vous ne pouvez pas supprimer votre propre compte administrateur !");
@@ -217,7 +214,7 @@ public class DashBoardAdminController {
         Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
         confirmation.setTitle("Confirmation de suppression");
         confirmation.setHeaderText("Supprimer l'utilisateur : " + selected.getPrenom() + " " + selected.getNom());
-        confirmation.setContentText("⚠️ ATTENTION ⚠️\n\n" +
+        confirmation.setContentText(" ATTENTION \n\n" +
                 "Cette action supprimera :\n" +
                 "• L'utilisateur\n" +
                 "• Toutes ses assignations\n" +
@@ -251,19 +248,19 @@ public class DashBoardAdminController {
 
 
             if ("MEMBRE".equals(userType)) {
-                // Supprimer les assignations de projets
+                //supprimer les assignations de projets
                 String deleteMemberProjects = "DELETE FROM membre_project_tab WHERE membre_id = ?";
                 PreparedStatement pstmt1 = conn.prepareStatement(deleteMemberProjects);
                 pstmt1.setString(1, userId);
                 totalDeleted += pstmt1.executeUpdate();
 
-                // Désassigner les tâches
+                //désassigner les tâches
                 String unassignTasks = "UPDATE tache_tab SET membre_assigne_id = NULL WHERE membre_assigne_id = ?";
                 PreparedStatement pstmt2 = conn.prepareStatement(unassignTasks);
                 pstmt2.setString(1, userId);
                 totalDeleted += pstmt2.executeUpdate();
 
-                // Supprimer les infos membre
+                //supprimer les infos membre
                 String deleteMemberInfo = "DELETE FROM membre_info_tab WHERE membre_id = ?";
                 PreparedStatement pstmt3 = conn.prepareStatement(deleteMemberInfo);
                 pstmt3.setString(1, userId);
@@ -272,14 +269,14 @@ public class DashBoardAdminController {
 
 
             if ("CHEF_PROJET".equals(userType)) {
-                // Mettre à NULL le chef des projets (ou les supprimer selon la logique métier)
+                //mettre à NULL le chef des projets
                 String updateProjects = "UPDATE project_tab SET chef_projet_id = NULL WHERE chef_projet_id = ?";
                 PreparedStatement pstmt4 = conn.prepareStatement(updateProjects);
                 pstmt4.setString(1, userId);
                 totalDeleted += pstmt4.executeUpdate();
             }
 
-            // 3. Supprimer l'utilisateur
+            //supprimer l'utilisateur
             String deleteUser = "DELETE FROM user_tab WHERE id = ?";
             PreparedStatement pstmt5 = conn.prepareStatement(deleteUser);
             pstmt5.setString(1, userId);

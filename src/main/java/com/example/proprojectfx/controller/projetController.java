@@ -571,8 +571,6 @@ public class projetController {
         return alert.showAndWait().get() == ButtonType.OK;
     }
 
-    // ======================== CLASSE MODÈLE PROJECT ========================
-
 
     public static class Project {
         private String id;
